@@ -1,0 +1,27 @@
+.map-container {
+  position: relative;
+  height: 300px;
+  @media (min-width: 992px) {
+    height: 450px;
+  }
+
+  &.fade {
+    opacity: 0;
+    transition: opacity 195ms ease-out;
+    &.in {
+      opacity: 1;
+      transition: opacity 225ms ease-in;
+    }
+  }
+
+  > .map {
+    height: inherit;
+  }
+}
+
+// Fix Mapkit canvas
+.mk-map-view {
+  > .syrup-canvas {
+    margin-left: -50%;
+  }
+}

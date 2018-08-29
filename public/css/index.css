@@ -1,0 +1,1 @@
+.map-container{position:relative;height:300px}@media (min-width:992px){.map-container{height:450px}}.map-container.fade{opacity:0;transition:opacity 195ms ease-out}.map-container.fade.in{opacity:1;transition:opacity 225ms ease-in}.map-container>.map{height:inherit}.mk-map-view>.syrup-canvas{margin-left:-50%}
