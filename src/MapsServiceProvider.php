@@ -15,12 +15,12 @@ class MapsServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->publishFiles();
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'maps');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'maps');
 
         view()->composer('maps::*', function ($view) {
             $type = $view->type ?? config('vendor.maps.default');
             $enabled = $view->enabled ?? config('vendor.maps.enabled');
-            $key = config('vendor.maps.maps.' . $type . '.key');
+            $key = config('vendor.maps.maps.'.$type.'.key');
 
             // TODO: Warn missing key?
 
@@ -53,7 +53,7 @@ class MapsServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/maps.php', 'vendor.maps');
+        $this->mergeConfigFrom(__DIR__.'/../config/maps.php', 'vendor.maps');
 
         Blade::include('maps::styles', 'mapstyles');
         Blade::include('maps::scripts', 'mapscripts');
@@ -69,13 +69,13 @@ class MapsServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/maps.php' => config_path('vendor/maps.php'),
+                __DIR__.'/../config/maps.php' => config_path('vendor/maps.php'),
             ], 'config');
             $this->publishes([
-                __DIR__ . '/../public' => public_path('vendor/maps'),
+                __DIR__.'/../public' => public_path('vendor/maps'),
             ], 'public');
             $this->publishes([
-                __DIR__ . '/../public' => public_path('vendor/maps'),
+                __DIR__.'/../public' => public_path('vendor/maps'),
             ], 'maps');
         }
     }
