@@ -124,3 +124,35 @@ Fade in by default when using Bootstrap 3.3.7 or 4+. To replicate or modify the 
     opacity: 0;
 }
 ```
+
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+
+## Security
+
+If you discover any security related issues, please email em@gonoware.com 
+instead of using the issue tracker.
+
+
+## Credits
+
+- [Emanuel Mutschlechner](https://gitlab.com/emanuelmutschlechner)
+- [Benedikt Tuschter](https://gitlab.com/benedikttuschter)
+- [All Contributors](https://gitlab.com/gonoware/laravel-maps/graphs/master)
+
+
+## License
+
+[MIT](LICENSE.md)
+ 
+Copyright (c) 2018-present Go NoWare
+ 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgitlab.com%2Fgonoware%2Flaravel-maps.svg?type=large)](https://app.fossa.io/projects/git%2Bgitlab.com%2Fgonoware%2Flaravel-maps?ref=badge_large)
