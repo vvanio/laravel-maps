@@ -1,41 +1,57 @@
-import google from './types/google';
-import osm from './types/osm';
-import bing from './types/bing';
-import mapkit from './types/mapkit';
+import google from './services/google';
+import osm from './services/osm';
+import bing from './services/bing';
+import mapquest from './services/mapquest';
+import yandex from './services/yandex';
+import mapkit from './services/mapkit';
 
 import parser from './utils/parser';
-import {isDefined} from './utils/helper';
+import {isDefined, logError} from './utils/helper';
 
 const createMap = (element, createMap, createMarker) => {
   if (!isDefined(element)) {
+    logError('element is undefined');
     return;
   }
   const mapData = parser.map(element);
+  if (!isDefined(mapData)) {
+    logError('map data is undefined');
+    return;
+  }
   const map = createMap(element, mapData);
+  if (!isDefined(map)) {
+    logError('map is undefined');
+    return;
+  }
 
   mapData.markers.forEach(markerData => {
-    if (!isDefined(map)) {
-      return;
-    }
     createMarker(map, markerData);
   })
 };
 
-const createMapType = map => {
-  const createMapType = element => createMap(
+const createMapService = service => {
+  const createMapService = element => createMap(
     element,
-    map.createMap,
-    map.createMarker,
+    service.createMap,
+    service.createMarker,
   );
-  const selector = `[data-map-type="${map.type}"]`;
+  const selector = `[data-map-${service.NAME}]`;
   const elements = document.querySelectorAll(selector) || [];
-  elements.forEach(createMapType);
+  elements.forEach(createMapService);
 };
 
-window.onGoogleMapsReady = () => createMapType(google);
+window.onGoogleMapsReady = () => createMapService(google);
 
-(() => createMapType(osm))();
+window.onYandexMapsReady = () => createMapService(yandex);
 
-(() => createMapType(bing))();
+window.addEventListener('DOMContentLoaded', () => {
+  (() => createMapService(osm))();
 
-(() => createMapType(mapkit))();
+  (() => createMapService(bing))();
+
+  (() => createMapService(mapquest))();
+
+  (() => createMapService(mapkit))();
+});
+
+

@@ -1,6 +1,6 @@
 @if ($enabled)
-    <div class="map-container fade">
-        <div class="map" data-map-key="{{ $key }}" data-map-type="{{ $type }}" data-map-lat="{{ $lat }}" data-map-lng="{{ $lng }}" data-map-zoom="{{ $zoom }}" data-map-markers="{{ json_encode($markers) }}"></div>
+    <div class="gnw-map-service gnw-map-service__{{ $service }}">
+        <div class="gnw-map fade" data-map-{{ $service }}="{{ json_encode(compact('lat', 'lng', 'zoom')) }}" data-map-service="{{ json_encode(config('vendor.maps.services.'.$service)) }}" data-map-markers="{{ json_encode($markers ?? []) }}"></div>
     </div>
 {{--
     <div class="col-lg-12"></div>

@@ -1,21 +1,23 @@
-import {fadeElementIn, isDefined, openLink} from '../utils/helper';
+import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
 
 export default {
-  type: 'google',
+  NAME: 'google',
   createMap(element, mapData) {
     if (!isDefined(window.google)) {
+      logError('google is undefined');
       return;
     }
     if (!isDefined(window.google.maps)) {
+      logError('google maps is undefined');
       return;
     }
 
-    const {lat, lng, zoom} = mapData;
+    const {lat, lng, zoom, service} = mapData;
 
     const map = new window.google.maps.Map(element, {
       center: new window.google.maps.LatLng(lat, lng),
-      zoom: zoom,
-      mapTypeId: window.google.maps.MapTypeId.ROADMAP,
+      zoom,
+      mapTypeId: service.type || window.google.maps.MapTypeId.ROADMAP,
     });
 
     window.google.maps.event.addListenerOnce(map, 'idle', () => {
@@ -25,12 +27,12 @@ export default {
     return map;
   },
   createMarker(map, markerData) {
-    const {lat, lng, url} = markerData;
+    const {title, lat, lng, url} = markerData;
 
     const marker = new window.google.maps.Marker({
       position: new window.google.maps.LatLng(lat, lng),
-      map: map,
-      title: 'Test Title', // TODO
+      map,
+      title,
       draggable: false,
       // icon: {
       //   url: markerConfig.mapMarkerImg,
@@ -39,7 +41,7 @@ export default {
 
     if (url) {
       marker.addListener('click', () => {
-        openLink(url);
+        openUrl(url);
       });
     }
   },

@@ -1,27 +1,30 @@
-.map-container {
+.gnw-map-service {
   position: relative;
-  height: 300px;
-  @media (min-width: 992px) {
-    height: 450px;
-  }
+  height: 400px;
 
-  &.fade {
-    opacity: 0;
-    transition: opacity 195ms ease-out;
-    &.in {
-      opacity: 1;
-      transition: opacity 225ms ease-in;
-    }
+  &__google {
+    background: rgb(229, 227, 223);
   }
-
-  > .map {
-    height: inherit;
+  &__osm,
+  &__bing,
+  &__mapquest {
+    background: rgb(221, 221, 221);
+  }
+  &__yandex {
+    background: rgb(243, 241, 237);
+  }
+  &__mapkit {
+    background: rgb(248, 244, 236);
   }
 }
 
-// Fix Mapkit canvas
-.mk-map-view {
-  > .syrup-canvas {
-    margin-left: -50%;
+.gnw-map {
+  height: inherit;
+
+  // Fix Mapkit canvas
+  .mk-map-view {
+    > .syrup-canvas {
+      margin-left: -50%;
+    }
   }
 }

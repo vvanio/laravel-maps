@@ -3,10 +3,19 @@
     "description": "A Laravel 5 package to add Google Maps to your application",
     "keywords": [
         "gonoware",
-        "google",
-        "maps",
         "laravel",
-        "tracking"
+        "maps",
+        "osm",
+        "google",
+        "bing",
+        "yandex",
+        "mapquest",
+        "googlemaps",
+        "openstreetmap",
+        "bingmaps",
+        "yandexmaps",
+        "mapkit",
+        "mapkitjs"
     ],
     "homepage": "https://gitlab.com/gonoware/laravel-maps",
     "support": {
@@ -56,7 +65,7 @@
     "scripts": {
         "build-script": [
             "yarn install",
-            "yarn run build"
+            "yarn run prod"
         ],
         "post-install-cmd": [
             "@build-script"

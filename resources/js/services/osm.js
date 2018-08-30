@@ -1,4 +1,4 @@
-import {fadeElementIn, isDefined, openLink} from '../utils/helper';
+import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
 
 // TODO maybe add this https://github.com/elmarquis/Leaflet.GestureHandling/
 
@@ -8,12 +8,13 @@ import {fadeElementIn, isDefined, openLink} from '../utils/helper';
 // TODO custom icons: https://leafletjs.com/examples/custom-icons/
 
 export default {
-  type: 'osm',
+  NAME: 'osm',
   createMap(element, mapData) {
     if (!isDefined(window.L)) {
+      logError('leaflet is undefined');
       return;
     }
-    const {lat, lng, zoom} = mapData;
+    const {lat, lng, zoom, service} = mapData;
 
     const map = window.L
       .map(element, {})
@@ -23,7 +24,7 @@ export default {
       .setView([lat, lng], zoom);
 
     window.L
-      .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      .tileLayer(service.type || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       })
       .addTo(map);
@@ -31,16 +32,21 @@ export default {
     return map;
   },
   createMarker(map, markerData) {
-    const {lat, lng, url} = markerData;
+    const {title, lat, lng, url} = markerData;
 
-    const marker = window.L
-      .marker([lat, lng])
-      .addTo(map);
+    const marker = window.L.marker([lat, lng], {
+      title,
+      keyboard: false,
+      draggable: false,
+    });
 
     if (url) {
-      marker.addEventListener('click', () => {
-        openLink(url);
+      marker.on('click', event => {
+        event.originalEvent.preventDefault();
+        openUrl(url);
       });
     }
+
+    marker.addTo(map);
   },
 }

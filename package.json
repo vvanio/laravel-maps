@@ -1,11 +1,17 @@
 {
     "private": true,
     "scripts": {
-        "build": "rimraf public && cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "prod": "rimraf public && yarn run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
         "cross-env": "^5.2.0",
-        "laravel-mix": "^2.1.11"
+        "laravel-mix": "^2.1.14",
+        "leaflet-bing-layer": "^3.3.0"
     },
     "browserslist": [
         "last 1 version",
@@ -18,8 +24,5 @@
         "Safari >= 9",
         "Android >= 4.4",
         "Opera >= 30"
-    ],
-    "dependencies": {
-        "leaflet-bing-layer": "^3.3.0"
-    }
+    ]
 }

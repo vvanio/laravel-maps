@@ -18,31 +18,13 @@ class MapsServiceProvider extends BaseServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'maps');
 
         view()->composer('maps::*', function ($view) {
-            $type = $view->type ?? config('vendor.maps.default');
-            $enabled = $view->enabled ?? config('vendor.maps.enabled');
-            $key = config('vendor.maps.maps.'.$type.'.key');
-
-            // TODO: Warn missing key?
-
-            return $view->with(compact(
-                'type',
-                'enabled',
-                'key'
-            ));
-        });
-
-        view()->composer('maps::index', function ($view) {
-            $lat = $view->lat ?? config('vendor.maps.lat');
-            $lng = $view->lng ?? config('vendor.maps.lng');
-            $zoom = $view->zoom ?? config('vendor.maps.zoom');
-            $markers = $view->markers ?? config('vendor.maps.markers');
-
-            return $view->with(compact(
-                'lat',
-                'lng',
-                'zoom',
-                'markers'
-            ));
+            if (!isset($view->service)) {
+                $view->with('service', config('vendor.maps.default'));
+            }
+            if (!isset($view->enabled)) {
+                $view->with('enabled',  config('vendor.maps.enabled'));
+            }
+            return $view;
         });
     }
 
