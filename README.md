@@ -138,7 +138,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email em@gonoware.com 
+If you discover any security related issues, please email [em@gonoware.com](mailto:em@gonoware.com) 
 instead of using the issue tracker.
 
 
