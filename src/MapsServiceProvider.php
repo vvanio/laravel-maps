@@ -22,8 +22,9 @@ class MapsServiceProvider extends BaseServiceProvider
                 $view->with('service', config('vendor.maps.default'));
             }
             if (!isset($view->enabled)) {
-                $view->with('enabled',  config('vendor.maps.enabled'));
+                $view->with('enabled', config('vendor.maps.enabled'));
             }
+
             return $view;
         });
     }

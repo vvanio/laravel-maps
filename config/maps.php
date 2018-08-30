@@ -26,7 +26,7 @@ return [
      |
      */
 
-    'default' => env('MAPS_SERVICE','yandex'),
+    'default' => env('MAPS_SERVICE', 'yandex'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,6 @@ return [
             'type' => 'map', // 'map', 'hybrid', 'satellite', 'light', 'dark'
         ],
 
-
         'mapkit' => [
             // https://developer.apple.com/videos/play/wwdc2018/508
             // https://developer.apple.com/documentation/mapkitjs/setting_up_mapkit_js?changes=latest_minor
@@ -91,7 +90,6 @@ return [
         ],
 
     ],
-
 
     /*
      |--------------------------------------------------------------------------
