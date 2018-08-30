@@ -5,6 +5,19 @@ namespace GoNoWare\Maps;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
+/*
+TODO:
+https://www.bing.com/maps/embed-a-map
+https://developers.google.com/maps/documentation/maps-static/intro
+https://wiki.openstreetmap.org/wiki/OpenLinkMap#Embed_map_in_another_website
+
+embed via iframe:
+  - bing
+  - osm?
+javascript api:
+  - all
+*/
+
 class MapsServiceProvider extends BaseServiceProvider
 {
     /**
