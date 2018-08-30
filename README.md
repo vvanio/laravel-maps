@@ -67,7 +67,7 @@ Display a map by adding the `@map` directive to your Blade template.
 @map([
     'lat' => '48.134664',
     'lng' => '11.555220',
-    'zoom' => '6'
+    'zoom' => '6',
 ])
 ```
 You can also show markers/pins/annotations:
@@ -75,7 +75,7 @@ You can also show markers/pins/annotations:
 @map([
     'lat' => '48.134664',
     'lng' => '11.555220',
-    'zoom' => '6'
+    'zoom' => '6',
     'markers' => [[
         'title' => 'Go NoWare',
         'lat' => '48.134664',
@@ -89,7 +89,7 @@ Open a url when a marker is clicked
 @map([
     'lat' => '48.134664',
     'lng' => '11.555220',
-    'zoom' => '6'
+    'zoom' => '6',
     'markers' => [[
         'title' => 'Go NoWare',
         'lat' => '48.134664',
