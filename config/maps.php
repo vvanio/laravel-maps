@@ -26,7 +26,7 @@ return [
      |
      */
 
-    'default' => env('MAPS_SERVICE', 'yandex'),
+    'default' => env('MAPS_SERVICE', 'osm'),
 
     /*
     |--------------------------------------------------------------------------
