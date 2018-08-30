@@ -2,9 +2,9 @@
     "name": "gonoware/laravel-maps",
     "description": "A Laravel 5 package to add Google Maps to your application",
     "keywords": [
-        "gonoware",
-        "laravel",
         "maps",
+        "laravel",
+        "gonoware",
         "osm",
         "google",
         "bing",
