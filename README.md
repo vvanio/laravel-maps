@@ -144,7 +144,7 @@ instead of using the issue tracker.
 
 ## Credits
 
-- [Emanuel Mutschlechner](https://gitlab.com/emanuelmutschlechner)
+- [Emanuel Mutschlechner](https://gitlab.com/emanuel)
 - [Benedikt Tuschter](https://gitlab.com/benedikttuschter)
 - [All Contributors](https://gitlab.com/gonoware/laravel-maps/graphs/master)
 
