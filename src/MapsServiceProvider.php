@@ -16,6 +16,10 @@ embed via iframe:
   - osm?
 javascript api:
   - all
+
+Add custom marker
+
+Add custom popup
 */
 
 class MapsServiceProvider extends BaseServiceProvider
