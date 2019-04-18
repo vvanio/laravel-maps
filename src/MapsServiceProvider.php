@@ -32,6 +32,11 @@ class MapsServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->publishFiles();
+
+        Blade::include('maps::styles', 'mapstyles');
+        Blade::include('maps::scripts', 'mapscripts');
+        Blade::include('maps::index', 'map');
+
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'maps');
 
         view()->composer('maps::*', function ($view) {
@@ -54,10 +59,6 @@ class MapsServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/maps.php', 'vendor.maps');
-
-        Blade::include('maps::styles', 'mapstyles');
-        Blade::include('maps::scripts', 'mapscripts');
-        Blade::include('maps::index', 'map');
     }
 
     /**
