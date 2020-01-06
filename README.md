@@ -24,13 +24,12 @@ Supported map services:
 ## Features
 | | Google Maps | OpenStreetMap | Bing Maps | MapQuest | Yandex Maps | MapKit |  
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Map | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
-| Markers | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
-| Marker Title | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
-| Marker Link | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
-| Custom Marker Icon | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
-| Marker Popup | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ |
-| Marker Click Event | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | 
+| [Map](#basic-map) | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| [Markers](#map-with-markers) | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| [Marker Links](#marker-links) | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| [Marker Popups](#marker-popups) | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ |
+| [Custom Marker Icons](#custom-marker-icons) | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| [Marker Click Event](#marker-clicked) | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | 
 
 ## Installation
 
@@ -75,6 +74,7 @@ before the `</body>` closing tag, to load the map scripts.
 @mapscripts
 ```
 
+### Basic Map
 Display a map by adding the `@map` directive to your Blade template.
 ```php
 @map([
@@ -83,70 +83,100 @@ Display a map by adding the `@map` directive to your Blade template.
     'zoom' => 6,
 ])
 ```
-You can also show markers/pins/annotations:
+
+### Map With Markers
+You can also show markers / pins / annotations:
 ```php
 @map([
     'lat' => 48.134664,
     'lng' => 11.555220,
     'zoom' => 6,
-    'markers' => [[
-        'title' => 'Go NoWare',
-        'lat' => 48.134664,
-        'lng' => 11.555220,
-    ]],
+    'markers' => [
+        [
+            'title' => 'Go NoWare',
+            'lat' => 48.134664,
+            'lng' => 11.555220,
+        ],
+    ],
 ])
 ```
 
-Open a url when a marker is clicked
+### Marker Links
+Open a url when a marker is clicked.
 ```php
 @map([
     'lat' => 48.134664,
     'lng' => 11.555220,
     'zoom' => 6,
-    'markers' => [[
-        'title' => 'Go NoWare',
-        'lat' => 48.134664,
-        'lng' => 11.555220,
-        'url' => 'https://gonoware.com',
-    ]],
+    'markers' => [
+        [
+            'title' => 'Go NoWare',
+            'lat' => 48.134664,
+            'lng' => 11.555220,
+            'url' => 'https://gonoware.com',
+        ],
+    ],
 ])
 ```
 
-Show a custom marker icon. The URL to the icon image can be absolute or relative.
+### Marker Popups
+Show a popup when a marker is clicked. The `popup` attribute may contain HTML markup.
 ```php
 @map([
     'lat' => 48.134664,
     'lng' => 11.555220,
     'zoom' => 6,
-    'markers' => [[
-        'title' => 'Go NoWare',
-        'lat' => '48.134664',
-        'lng' => '11.555220',
-        'url' => 'https://gonoware.com',
-        'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-    ]],
+    'markers' => [
+        [
+                'title' => 'Go NoWare',
+                'lat' => 48.134664,
+                'lng' => 11.555220,
+                'popup' => '<h3>Details</h3><p>Click <a href="https://gonoware.com">here</a>.</p>',
+        ],
+    ],
 ])
 ```
 
-Additionally you may also specify the icon image size and anchor in pixels. The icon will be aligned so that the anchor point is at the marker's geographical location.
+### Custom Marker Icons
+Show a custom marker icon. Absolute and relative URLs are supported.
+```php
+@map([
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
+    'markers' => [
+        [
+            'title' => 'Go NoWare',
+            'lat' => '48.134664',
+            'lng' => '11.555220',
+            'url' => 'https://gonoware.com',
+            'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        ],
+    ],
+])
+```
+
+Additionally you may also specify the icon image size and anchor in pixels. The image will be aligned so that the tip of the icon is at the marker's geographical location.
 ```php
 @map([
     'lat' => '48.134664',
     'lng' => '11.555220',
     'zoom' => '6',
-    'markers' => [[
-        'title' => 'Go NoWare',
-        'lat' => '48.134664',
-        'lng' => '11.555220',
-        'url' => 'https://gonoware.com',
-        'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-        'iconSize' => [20, 32],
-        'iconAnchor' => [0, 32],
-    ]],
+    'markers' => [
+        [
+            'title' => 'Go NoWare',
+            'lat' => '48.134664',
+            'lng' => '11.555220',
+            'url' => 'https://gonoware.com',
+            'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+            'iconSize' => [20, 32],
+            'iconAnchor' => [0, 32],
+        ],
+    ],
 ])
 ```
 
-## Customization
+## Styling
 
 To adjust the height of the map use CSS:
 ```css
@@ -172,7 +202,7 @@ Fade in by default when using Bootstrap 3.3.7 or 4+. To replicate or modify the 
 }
 ```
 
-## Advanced Customization
+## Events
 
 ### Map Initialized
 The event `LaravelMaps:MapInitialized` will be dispatched when a map and its markers were initialized. The DOM element, map, 

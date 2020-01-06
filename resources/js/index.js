@@ -43,8 +43,12 @@ const createMapService = service => {
   const selector = `[data-map-${service.name}]`;
   const elements = Array.prototype.slice.call(document.querySelectorAll(selector) || []);
   elements.forEach(element => {
+    if (element.getAttribute('data-map-initialized') === true) {
+      return;
+    }
     const data = createMapService(element);
     dispatchEventMapInitialized(service.name, element, data);
+    element.setAttribute('data-map-initialized', true);
   });
 };
 
