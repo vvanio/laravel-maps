@@ -2,10 +2,10 @@ import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
 import 'leaflet-bing-layer';
 import {createMarker} from '../utils/leaflet';
 
-// TODO: locales/culture
+const name = 'bing';
 
 export default {
-  NAME: 'bing',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.L)) {
       logError('leaflet is undefined');
@@ -29,5 +29,5 @@ export default {
 
     return map;
   },
-  createMarker,
+  createMarker: createMarker.bind(null, name),
 }

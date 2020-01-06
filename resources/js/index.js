@@ -8,6 +8,7 @@ import mapkit from './services/mapkit';
 import parser from './utils/parser';
 import {isDefined, logError} from './utils/helper';
 import './utils/customEventPolyfill';
+import {dispatchEventMapInitialized} from './utils/dispatchEvent';
 
 const createMap = (element, createMap, createMarker) => {
   if (!isDefined(element)) {
@@ -25,7 +26,7 @@ const createMap = (element, createMap, createMarker) => {
     return;
   }
 
-  const markers = mapData.markers.map(markerData => createMarker(map, markerData));
+  const markers = mapData.markers.map(markerData => createMarker(element, map, markerData));
 
   return {
     map,
@@ -39,24 +40,12 @@ const createMapService = service => {
     service.createMap,
     service.createMarker,
   );
-  const selector = `[data-map-${service.NAME}]`;
+  const selector = `[data-map-${service.name}]`;
   const elements = Array.prototype.slice.call(document.querySelectorAll(selector) || []);
   elements.forEach(element => {
     const data = createMapService(element);
-    dispatchEvent(service.NAME, element, data);
+    dispatchEventMapInitialized(service.name, element, data);
   });
-};
-
-const dispatchEvent = (serviceName, element, data) => {
-  const event = new CustomEvent('LaravelMapInitialized', {
-    detail: {
-      element: element,
-      map: data.map,
-      markers: data.markers || [],
-      service: serviceName,
-    },
-  });
-  window.dispatchEvent(event);
 };
 
 window.onGoogleMapsReady = () => createMapService(google);

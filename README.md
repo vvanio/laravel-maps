@@ -20,6 +20,18 @@ Supported map services:
 
 > Note: Yandex Maps API does not work in Chrome.
 
+
+## Features
+| | Google Maps | OpenStreetMap | Bing Maps | MapQuest | Yandex Maps | MapKit |  
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Map | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Markers | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Marker Title | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Marker Link | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Custom Marker Icon | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Marker Popup | ✔ | ✔ | ✔ | ✔ | ✔ | ❌ |
+| Marker Click Event | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | 
+
 ## Installation
 
 This package can be installed through Composer.
@@ -66,21 +78,21 @@ before the `</body>` closing tag, to load the map scripts.
 Display a map by adding the `@map` directive to your Blade template.
 ```php
 @map([
-    'lat' => '48.134664',
-    'lng' => '11.555220',
-    'zoom' => '6',
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
 ])
 ```
 You can also show markers/pins/annotations:
 ```php
 @map([
-    'lat' => '48.134664',
-    'lng' => '11.555220',
-    'zoom' => '6',
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
     'markers' => [[
         'title' => 'Go NoWare',
-        'lat' => '48.134664',
-        'lng' => '11.555220',
+        'lat' => 48.134664,
+        'lng' => 11.555220,
     ]],
 ])
 ```
@@ -88,13 +100,13 @@ You can also show markers/pins/annotations:
 Open a url when a marker is clicked
 ```php
 @map([
-    'lat' => '48.134664',
-    'lng' => '11.555220',
-    'zoom' => '6',
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
     'markers' => [[
         'title' => 'Go NoWare',
-        'lat' => '48.134664',
-        'lng' => '11.555220',
+        'lat' => 48.134664,
+        'lng' => 11.555220,
         'url' => 'https://gonoware.com',
     ]],
 ])
@@ -103,9 +115,9 @@ Open a url when a marker is clicked
 Show a custom marker icon. The URL to the icon image can be absolute or relative.
 ```php
 @map([
-    'lat' => '48.134664',
-    'lng' => '11.555220',
-    'zoom' => '6',
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
     'markers' => [[
         'title' => 'Go NoWare',
         'lat' => '48.134664',
@@ -161,15 +173,17 @@ Fade in by default when using Bootstrap 3.3.7 or 4+. To replicate or modify the 
 ```
 
 ## Advanced Customization
-The event `LaravelMapInitialized` will be dispatched when a map and its markers were initialized. The DOM element, map, 
-markers and service name can be accessed via the event details. 
+
+### Map Initialized
+The event `LaravelMaps:MapInitialized` will be dispatched when a map and its markers were initialized. The DOM element, map, 
+markers and service name can be accessed via the event details.
 ```js
-window.addEventListener('LaravelMapInitialized', function (event) {
-    var element = event.detail.element;
-    var map = event.detail.map;
-    var markers = event.detail.markers;
-    var service = event.detail.service;
-    console.log(element, map, markers, service);
+window.addEventListener('LaravelMaps:MapInitialized', function (event) {
+   var element = event.detail.element;
+   var map = event.detail.map;
+   var markers = event.detail.markers;
+   var service = event.detail.service;
+   console.log('map initialized', element, map, markers, service);
 });
 ```
 Please refer to the respective documentation for advanced customization:
@@ -179,6 +193,20 @@ Please refer to the respective documentation for advanced customization:
  * [MapQuest](https://leafletjs.com/reference-1.6.0.html)
  * [Yandex Maps](https://tech.yandex.com/maps/jsapi/)
  * [MapKit (beta)](https://developer.apple.com/documentation/mapkitjs)
+
+### Marker Clicked
+The event `LaravelMaps:MarkerClicked` will be dispatched when a marker was clicked. The DOM element, map, markers and 
+service name can be accessed via the event details.
+```js
+window.addEventListener('LaravelMaps:MarkerClicked', function (event) {
+    var element = event.detail.element;
+    var map = event.detail.map;
+    var marker = event.detail.marker;
+    var service = event.detail.service;
+    console.log('marker clicked', element, map, marker, service);
+});
+```
+
 
 ## Changelog
 

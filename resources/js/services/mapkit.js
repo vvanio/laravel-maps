@@ -1,7 +1,10 @@
-import {fadeElementIn, isDefined, logError} from '../utils/helper';
+import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
+import {dispatchEventMarkerClicked} from "../utils/dispatchEvent";
+
+const name = 'mapkit';
 
 export default {
-  NAME: 'mapkit',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.mapkit)) {
       logError('mapkit is undefined');
@@ -11,14 +14,6 @@ export default {
 
     window.mapkit.init({
       authorizationCallback(done) {
-        /*
-             const xhr = new XMLHttpRequest();
-             xhr.open('GET', '/services/jwt');
-             xhr.addEventListener('load', function() {
-               done(this.responseText);
-             });
-             xhr.send();
-             */
         done(service.key);
       },
     });
@@ -40,25 +35,12 @@ export default {
 
     return map;
   },
-  createMarker(map, markerData) {
-    const {title, lat, lng, url, icon} = markerData;
+  createMarker(element, map, markerData) {
+    const {title, lat, lng, url, popup, icon} = markerData;
 
     const coordinate = new window.mapkit.Coordinate(lat, lng);
 
     const markerAnnotationOptions = {title};
-
-    if (url) {
-      markerAnnotationOptions.callout = {
-        calloutRightAccessoryForAnnotation: function() {
-          const accessoryViewRight = document.createElement('a');
-          accessoryViewRight.className = 'right-accessory-view';
-          accessoryViewRight.href = url;
-          accessoryViewRight.target = '_blank';
-          accessoryViewRight.appendChild(document.createTextNode('ⓘ'));
-          return accessoryViewRight;
-        }
-      };
-    }
 
     if (icon) {
         markerAnnotationOptions.glyphImage = {
@@ -67,6 +49,15 @@ export default {
     }
 
     const marker = new window.mapkit.MarkerAnnotation(coordinate, markerAnnotationOptions);
+
+    marker.addEventListener('select', event => {
+      dispatchEventMarkerClicked(name, element, map, marker);
+      if (popup) {
+        // TODO
+      } else if (url) {
+        openUrl(url);
+      }
+    });
 
     map.showItems([marker]); // TODO: map auto resize bugging if multiple markers
 

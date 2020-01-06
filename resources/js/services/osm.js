@@ -8,8 +8,10 @@ import {createMarker} from '../utils/leaflet';
 
 // TODO custom icons: https://leafletjs.com/examples/custom-icons/
 
+const name = 'osm';
+
 export default {
-  NAME: 'osm',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.L)) {
       logError('leaflet is undefined');
@@ -32,5 +34,5 @@ export default {
 
     return map;
   },
-  createMarker,
+  createMarker: createMarker.bind(null, name),
 }

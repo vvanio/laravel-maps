@@ -1,7 +1,10 @@
-import {isDefined, logError} from '../utils/helper';
+import {isDefined, logError, openUrl} from '../utils/helper';
+import {dispatchEventMarkerClicked} from '../utils/dispatchEvent';
+
+const name = 'yandex';
 
 export default {
-  NAME: 'yandex',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.ymaps)) {
       logError('ymaps is undefined');
@@ -20,8 +23,8 @@ export default {
 
     return map;
   },
-  createMarker(map, markerData) {
-    const {title, lat, lng, url, icon, iconSize, iconAnchor} = markerData;
+  createMarker(element, map, markerData) {
+    const {title, lat, lng, url, popup, icon, iconSize, iconAnchor} = markerData;
 
     const placemarkProperties = {
       hintContent: title,
@@ -40,13 +43,20 @@ export default {
       }
     }
 
+    if (popup) {
+      placemarkProperties.balloonContentBody = popup;
+    }
+
     const marker = new window.ymaps.Placemark([lat, lng], placemarkProperties, placemarkOptions);
 
-    // if (url) {
-    //   marker.addListener('click', () => {
-    //     openUrl(url);
-    //   });
-    // }
+    marker.events.add('click', e => {
+      dispatchEventMarkerClicked(name, element, map, marker);
+      if (popup) {
+        // Handled with ballonContentBody
+      } else if (url) {
+        openUrl(url);
+      }
+    });
 
     map.geoObjects.add(marker);
 

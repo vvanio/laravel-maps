@@ -7,9 +7,10 @@ import {createMarker} from '../utils/leaflet';
 // http://leaflet-extras.github.io/leaflet-providers/preview/
 
 // TODO custom icons: https://leafletjs.com/examples/custom-icons/
+const name = 'mapquest';
 
 export default {
-  NAME: 'mapquest',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.L)) {
       logError('leaflet is undefined');
@@ -35,5 +36,5 @@ export default {
 
     return map;
   },
-  createMarker,
+  createMarker: createMarker.bind(null, name),
 }

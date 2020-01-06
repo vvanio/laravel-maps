@@ -1,4 +1,4 @@
-import {logError} from "./helper";
+import {logError} from './helper';
 
 const parseMap = element => JSON.parse(
   element.dataset.mapGoogle
@@ -21,15 +21,17 @@ const parseService = element => {
 const parseMarkers = element => {
   const markers = JSON.parse(element.dataset.mapMarkers) || [];
   return markers.map(marker => {
-    const lat = parseFloat(marker.lat);
-    const lng = parseFloat(marker.lng);
-    const {title, url, icon, iconSize, iconAnchor} = marker;
+    const lat = parseNumberFloat(marker.lat);
+    const lng = parseNumberFloat(marker.lng);
+
+    const {title, url, popup, icon, iconSize, iconAnchor} = marker;
 
     return {
       title,
       lat,
       lng,
       url,
+      popup,
       icon,
       iconSize,
       iconAnchor,
@@ -37,13 +39,25 @@ const parseMarkers = element => {
   });
 };
 
+const parseNumberFloat = number => {
+  return typeof number === 'string'
+    ? parseFloat(number)
+    : number;
+};
+
+const parseNumberInt = number => {
+  return typeof number === 'string'
+    ? parseFloat(number)
+    : number;
+};
+
 export default {
   map(element) {
     try {
       const map = parseMap(element);
-      const lat = parseFloat(map.lat);
-      const lng = parseFloat(map.lng);
-      const zoom = parseInt(map.zoom);
+      const lat = parseNumberFloat(map.lat);
+      const lng = parseNumberFloat(map.lng);
+      const zoom = parseNumberInt(map.zoom);
       const service = parseService(element);
       const markers = parseMarkers(element);
       return {

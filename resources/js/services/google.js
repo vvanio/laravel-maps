@@ -1,7 +1,10 @@
 import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
+import {dispatchEventMarkerClicked} from '../utils/dispatchEvent';
+
+const name = 'google';
 
 export default {
-  NAME: 'google',
+  name,
   createMap(element, mapData) {
     if (!isDefined(window.google)) {
       logError('google is undefined');
@@ -26,8 +29,8 @@ export default {
 
     return map;
   },
-  createMarker(map, markerData) {
-    const {title, lat, lng, url, icon, iconSize, iconAnchor} = markerData;
+  createMarker(element, map, markerData) {
+    const {title, lat, lng, url, popup, icon, iconSize, iconAnchor} = markerData;
 
     const markerOptions = {
       position: new window.google.maps.LatLng(lat, lng),
@@ -50,11 +53,17 @@ export default {
 
     const marker = new window.google.maps.Marker(markerOptions);
 
-    if (url) {
-      marker.addListener('click', () => {
+    marker.addListener('click', () => {
+      dispatchEventMarkerClicked(name, element, map, marker);
+      if (popup) {
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: popup
+        });
+        infoWindow.open(map, marker);
+      } else if (url) {
         openUrl(url);
-      });
-    }
+      }
+    });
 
     return marker;
   },

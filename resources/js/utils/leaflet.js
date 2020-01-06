@@ -1,7 +1,8 @@
 import {openUrl} from './helper';
+import {dispatchEventMarkerClicked} from './dispatchEvent';
 
-export function createMarker(map, markerData) {
-  const {title, lat, lng, url, icon, iconSize, iconAnchor} = markerData;
+export function createMarker(service, element, map, markerData) {
+  const {title, lat, lng, url, popup, icon, iconSize, iconAnchor} = markerData;
 
   const markerOptions = {
     title,
@@ -24,12 +25,18 @@ export function createMarker(map, markerData) {
 
   const marker = window.L.marker([lat, lng], markerOptions);
 
-  if (url) {
-    marker.on('click', event => {
-      event.originalEvent.preventDefault();
+  marker.on('click', event => {
+    event.originalEvent.preventDefault();
+    dispatchEventMarkerClicked(service, element, map, marker);
+    if (popup) {
+      window.L.popup()
+        .setLatLng([lat, lng])
+        .setContent(popup)
+        .openOn(map);
+    } else if (url) {
       openUrl(url);
-    });
-  }
+    }
+  });
 
   marker.addTo(map);
 
