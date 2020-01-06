@@ -41,13 +41,35 @@ export default {
     return map;
   },
   createMarker(map, markerData) {
-    const {title, lat, lng, url} = markerData;
+    const {title, lat, lng, url, icon} = markerData;
 
     const coordinate = new window.mapkit.Coordinate(lat, lng);
-    const marker = new window.mapkit.MarkerAnnotation(coordinate, {
-      title,
-    });
+
+    const markerAnnotationOptions = {title};
+
+    if (url) {
+      markerAnnotationOptions.callout = {
+        calloutRightAccessoryForAnnotation: function() {
+          const accessoryViewRight = document.createElement('a');
+          accessoryViewRight.className = 'right-accessory-view';
+          accessoryViewRight.href = url;
+          accessoryViewRight.target = '_blank';
+          accessoryViewRight.appendChild(document.createTextNode('ⓘ'));
+          return accessoryViewRight;
+        }
+      };
+    }
+
+    if (icon) {
+        markerAnnotationOptions.glyphImage = {
+            1: icon,
+        };
+    }
+
+    const marker = new window.mapkit.MarkerAnnotation(coordinate, markerAnnotationOptions);
 
     map.showItems([marker]); // TODO: map auto resize bugging if multiple markers
+
+    return marker;
   },
 };

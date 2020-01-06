@@ -9,9 +9,13 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "cross-env": "^5.2.0",
-        "laravel-mix": "^2.1.14",
-        "leaflet-bing-layer": "^3.3.0"
+        "cross-env": "^6.0.3",
+        "laravel-mix": "^5.0.1",
+        "leaflet-bing-layer": "^3.3.1",
+        "resolve-url-loader": "^3.1.0",
+        "sass": "^1.24.2",
+        "sass-loader": "^8.0.0",
+        "vue-template-compiler": "^2.6.11"
     },
     "browserslist": [
         "last 1 version",

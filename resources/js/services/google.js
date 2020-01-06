@@ -27,22 +27,35 @@ export default {
     return map;
   },
   createMarker(map, markerData) {
-    const {title, lat, lng, url} = markerData;
+    const {title, lat, lng, url, icon, iconSize, iconAnchor} = markerData;
 
-    const marker = new window.google.maps.Marker({
+    const markerOptions = {
       position: new window.google.maps.LatLng(lat, lng),
       map,
       title,
       draggable: false,
-      // icon: {
-      //   url: markerConfig.mapMarkerImg,
-      // },
-    });
+    };
+
+    if (icon) {
+      markerOptions.icon = {
+        url: icon,
+      };
+      if (iconSize) {
+        markerOptions.icon.size = new window.google.maps.Size(...iconSize);
+      }
+      if (iconAnchor) {
+        markerOptions.icon.anchor = new window.google.maps.Point(...iconAnchor);
+      }
+    }
+
+    const marker = new window.google.maps.Marker(markerOptions);
 
     if (url) {
       marker.addListener('click', () => {
         openUrl(url);
       });
     }
+
+    return marker;
   },
 };

@@ -21,11 +21,26 @@ export default {
     return map;
   },
   createMarker(map, markerData) {
-    const {title, lat, lng, url} = markerData;
+    const {title, lat, lng, url, icon, iconSize, iconAnchor} = markerData;
 
-    const marker = new window.ymaps.Placemark([lat, lng], {
+    const placemarkProperties = {
       hintContent: title,
-    });
+    };
+
+    const placemarkOptions = {};
+
+    if (icon) {
+      placemarkOptions.iconLayout = 'default#imageWithContent';
+      placemarkOptions.iconImageHref = icon;
+      if (iconSize) {
+        placemarkOptions.iconImageSize = iconSize;
+      }
+      if (iconAnchor) {
+        placemarkOptions.iconImageOffset = iconAnchor;
+      }
+    }
+
+    const marker = new window.ymaps.Placemark([lat, lng], placemarkProperties, placemarkOptions);
 
     // if (url) {
     //   marker.addListener('click', () => {
@@ -34,5 +49,7 @@ export default {
     // }
 
     map.geoObjects.add(marker);
+
+    return marker;
   },
 };

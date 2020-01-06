@@ -23,13 +23,16 @@ const parseMarkers = element => {
   return markers.map(marker => {
     const lat = parseFloat(marker.lat);
     const lng = parseFloat(marker.lng);
-    const {title, url} = marker;
+    const {title, url, icon, iconSize, iconAnchor} = marker;
 
     return {
       title,
       lat,
       lng,
       url,
+      icon,
+      iconSize,
+      iconAnchor,
     };
   });
 };

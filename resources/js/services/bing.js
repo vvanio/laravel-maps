@@ -1,5 +1,6 @@
 import {fadeElementIn, isDefined, logError, openUrl} from '../utils/helper';
 import 'leaflet-bing-layer';
+import {createMarker} from '../utils/leaflet';
 
 // TODO: locales/culture
 
@@ -28,22 +29,5 @@ export default {
 
     return map;
   },
-  createMarker(map, markerData) {
-    const {title, lat, lng, url} = markerData;
-
-    const marker = window.L.marker([lat, lng], {
-      title,
-      keyboard: false,
-      draggable: false,
-    });
-
-    if (url) {
-      marker.on('click', event => {
-        event.originalEvent.preventDefault();
-        openUrl(url);
-      });
-    }
-
-    marker.addTo(map);
-  },
+  createMarker,
 }

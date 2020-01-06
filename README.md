@@ -100,6 +100,40 @@ Open a url when a marker is clicked
 ])
 ```
 
+Show a custom marker icon. The URL to the icon image can be absolute or relative.
+```php
+@map([
+    'lat' => '48.134664',
+    'lng' => '11.555220',
+    'zoom' => '6',
+    'markers' => [[
+        'title' => 'Go NoWare',
+        'lat' => '48.134664',
+        'lng' => '11.555220',
+        'url' => 'https://gonoware.com',
+        'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+    ]],
+])
+```
+
+Additionally you may also specify the icon image size and anchor in pixels. The icon will be aligned so that the anchor point is at the marker's geographical location.
+```php
+@map([
+    'lat' => '48.134664',
+    'lng' => '11.555220',
+    'zoom' => '6',
+    'markers' => [[
+        'title' => 'Go NoWare',
+        'lat' => '48.134664',
+        'lng' => '11.555220',
+        'url' => 'https://gonoware.com',
+        'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        'iconSize' => [20, 32],
+        'iconAnchor' => [0, 32],
+    ]],
+])
+```
+
 ## Customization
 
 To adjust the height of the map use CSS:
@@ -126,6 +160,25 @@ Fade in by default when using Bootstrap 3.3.7 or 4+. To replicate or modify the 
 }
 ```
 
+## Advanced Customization
+The event `LaravelMapInitialized` will be dispatched when a map and its markers were initialized. The DOM element, map, 
+markers and service name can be accessed via the event details. 
+```js
+window.addEventListener('LaravelMapInitialized', function (event) {
+    var element = event.detail.element;
+    var map = event.detail.map;
+    var markers = event.detail.markers;
+    var service = event.detail.service;
+    console.log(element, map, markers, service);
+});
+```
+Please refer to the respective documentation for advanced customization:
+ * [Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial)
+ * [OpenStreetMap](https://leafletjs.com/reference-1.6.0.html)
+ * [Bing Maps](https://leafletjs.com/reference-1.6.0.html)
+ * [MapQuest](https://leafletjs.com/reference-1.6.0.html)
+ * [Yandex Maps](https://tech.yandex.com/maps/jsapi/)
+ * [MapKit (beta)](https://developer.apple.com/documentation/mapkitjs)
 
 ## Changelog
 
