@@ -128,10 +128,10 @@ Show a popup when a marker is clicked. The `popup` attribute may contain HTML ma
     'zoom' => 6,
     'markers' => [
         [
-                'title' => 'Go NoWare',
-                'lat' => 48.134664,
-                'lng' => 11.555220,
-                'popup' => '<h3>Details</h3><p>Click <a href="https://gonoware.com">here</a>.</p>',
+            'title' => 'Go NoWare',
+            'lat' => 48.134664,
+            'lng' => 11.555220,
+            'popup' => '<h3>Details</h3><p>Click <a href="https://gonoware.com">here</a>.</p>',
         ],
     ],
 ])
