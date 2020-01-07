@@ -24,7 +24,7 @@ const parseMarkers = element => {
     const lat = parseNumberFloat(marker.lat);
     const lng = parseNumberFloat(marker.lng);
 
-    const {title, url, popup, icon, iconSize, iconAnchor} = marker;
+    const {title, url, popup, icon, icon_size, icon_anchor} = marker;
 
     return {
       title,
@@ -33,8 +33,8 @@ const parseMarkers = element => {
       url,
       popup,
       icon,
-      iconSize,
-      iconAnchor,
+      iconSize: icon_size || marker.iconSize,
+      iconAnchor: icon_anchor || marker.iconAnchor,
     };
   });
 };

@@ -2,6 +2,10 @@
 
 All notable changes will be documented in this file.
 
+### 1.2.2 - 2020-02-06
+
+- Change the marker options iconSize and iconAnchor to snake case
+
 ### 1.2.1 - 2020-01-06
 
 - Prevent double initialization

@@ -169,8 +169,8 @@ Additionally you may also specify the icon image size and anchor in pixels. The 
             'lng' => '11.555220',
             'url' => 'https://gonoware.com',
             'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-            'iconSize' => [20, 32],
-            'iconAnchor' => [0, 32],
+            'icon_size' => [20, 32],
+            'icon_anchor' => [0, 32],
         ],
     ],
 ])
