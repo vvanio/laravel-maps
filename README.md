@@ -147,8 +147,8 @@ Show a custom marker icon. Absolute and relative URLs are supported.
     'markers' => [
         [
             'title' => 'Go NoWare',
-            'lat' => '48.134664',
-            'lng' => '11.555220',
+            'lat' => 48.134664,
+            'lng' => 11.555220,
             'url' => 'https://gonoware.com',
             'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
         ],
@@ -159,14 +159,14 @@ Show a custom marker icon. Absolute and relative URLs are supported.
 Additionally you may also specify the icon image size and anchor in pixels. The image will be aligned so that the tip of the icon is at the marker's geographical location.
 ```php
 @map([
-    'lat' => '48.134664',
-    'lng' => '11.555220',
-    'zoom' => '6',
+    'lat' => 48.134664,
+    'lng' => 11.555220,
+    'zoom' => 6,
     'markers' => [
         [
             'title' => 'Go NoWare',
-            'lat' => '48.134664',
-            'lng' => '11.555220',
+            'lat' => 48.134664,
+            'lng' => 11.555220,
             'url' => 'https://gonoware.com',
             'icon' => 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
             'icon_size' => [20, 32],
