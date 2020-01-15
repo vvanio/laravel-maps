@@ -225,7 +225,7 @@ Please refer to the respective documentation for advanced customization:
  * [MapKit (beta)](https://developer.apple.com/documentation/mapkitjs)
 
 ### Marker Clicked
-The event `LaravelMaps:MarkerClicked` will be dispatched when a marker was clicked. The DOM element, map, markers and 
+The event `LaravelMaps:MarkerClicked` will be dispatched when a marker was clicked. The DOM element, map, marker and 
 service name can be accessed via the event details.
 ```js
 window.addEventListener('LaravelMaps:MarkerClicked', function (event) {

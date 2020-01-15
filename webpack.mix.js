@@ -6,4 +6,3 @@ mix.setPublicPath('public')
   .sass('resources/sass/index.scss', 'css')
   .copy('resources/img/*.png', 'public/img')
   .version('img');
-
