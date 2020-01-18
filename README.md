@@ -19,6 +19,7 @@ Supported map services:
 
 > Note: Yandex Maps API does not work in Chrome.
 
+For Laravel 5.5 use version [1.0.3](https://gitlab.com/gonoware/laravel-maps/tree/v1.0.3)
 
 ## Features
 | | Google Maps | OpenStreetMap | Bing Maps | MapQuest | Yandex Maps | MapKit |  
